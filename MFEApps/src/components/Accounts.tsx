@@ -8,13 +8,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 
+// Custom style definitions
 const useStyles = makeStyles(() => ({
   tableHeader: {
     fontWeight: 600,
   }
 }));
 
-// Define accountsType Interface
+// Transaction Interface
 interface ITransaction {
   Id: number;
   Balance: number;
@@ -33,7 +34,8 @@ export const Accounts = () => {
   const [transactions, setTransactions] = React.useState<ITransaction[]>([]);
 
   React.useEffect(() => {
-    fetch(apiEndpoint)
+    const random = Math.floor(Math.random() * 9000 + 1000);
+    fetch(apiEndpoint + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
