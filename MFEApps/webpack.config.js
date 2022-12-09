@@ -7,7 +7,7 @@ const config = {
     entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"), // the bundle output path
-        filename: "bundle.[hash].js", // the name of the bundle
+        filename: "jnvsalumniapps.js", // the name of the bundle
         publicPath: '/',
     },
     plugins: [
