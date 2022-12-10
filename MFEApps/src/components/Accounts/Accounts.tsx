@@ -45,6 +45,7 @@ export const Accounts = () => {
             <TableCell align="right">By</TableCell>
             <TableCell align="right">Batch</TableCell>
             <TableCell align="right">Purpose</TableCell>
+            <TableCell align="right">ReferenceId</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,6 +56,7 @@ export const Accounts = () => {
               <TableCell align="right">{row.TransactedBy}</TableCell>
               <TableCell align="right">{row.Batch}</TableCell>
               <TableCell align="right">{row.Description}</TableCell>
+              <TableCell align="right">{row.ReferenceId}</TableCell>
             </TableRow>
           ))}
         </TableBody>
