@@ -5,26 +5,22 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import { Stack } from "@mui/material";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
-
-// Custom style definitions
-const useStyles = makeStyles(() => ({
-  stackStyles: {
-    width: "100%",
-  },
-  cardStyles: {
-    margin: "5px",
-  },
-}));
+import {
+  iconButtonStyles,
+  searchBoxContainer,
+  searchBoxInputStyles,
+  searchBoxStackStyles,
+  searchButtonStyles,
+  searchResultContainer,
+  searchResultStackStyles,
+} from "./AlumniSearch.styles";
 
 // Define Alumni Interface
 interface IAlumnus {
+  Timestamp: string;
   Name: string;
   Batch: string;
   Exams: string;
@@ -41,34 +37,32 @@ interface IAlumnus {
 const apiEndpoint = "https://jnvsitamarhi.org/JsonData/alumni.json";
 
 export const AlumniSearch = () => {
-  const classes = useStyles();
   const [alumni, setAlumni] = React.useState<IAlumnus[]>([]);
   React.useEffect(() => {
     const random = Math.floor(Math.random() * 9000 + 1000);
     fetch(apiEndpoint + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setAlumni(data as IAlumnus[]);
       });
   }, []);
   return (
     <>
-      <Stack direction="row" flexWrap="wrap" spacing={0} justifyContent="center">
-        <Paper component="form" sx={{ p: "2px 4px", display: "flex", alignItems: "center", minWidth: 250, width: 450 }}>
-          <IconButton sx={{ p: "10px" }} aria-label="menu">
+      <Stack direction="row" spacing={0} sx={searchBoxStackStyles}>
+        <Paper component="form" sx={searchBoxContainer}>
+          <IconButton sx={iconButtonStyles} aria-label="menu">
             <PersonIcon />
           </IconButton>
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search Alumni" inputProps={{ "aria-label": "search alumni" }} />
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+          <InputBase sx={searchBoxInputStyles} placeholder="Search Alumni" inputProps={{ "aria-label": "search alumni" }} />
+          <IconButton type="button" sx={searchButtonStyles} aria-label="search">
             <SearchIcon />
           </IconButton>
         </Paper>
       </Stack>
 
-      <Stack direction="row" flexWrap="wrap" spacing={0} justifyContent="center">
+      <Stack direction="row" spacing={0} sx={searchResultStackStyles}>
         {alumni.map((row) => (
-          <Card raised className={classes.cardStyles} sx={{ minWidth: 275 }} key={row.Name + Math.floor(Math.random() * 9000 + 1000)}>
+          <Card raised sx={searchResultContainer} key={row.Timestamp}>
             <CardContent>
               <Typography variant="h6" component="div">
                 {row.Name}

@@ -6,14 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { makeStyles } from "@mui/styles";
-
-// Custom style definitions
-const useStyles = makeStyles(() => ({
-  tableHeader: {
-    fontWeight: 600,
-  }
-}));
+import { tableRowStyles, tableStyles } from "./Accounts.styles";
 
 // Transaction Interface
 interface ITransaction {
@@ -25,12 +18,12 @@ interface ITransaction {
   Date: string;
   Description: string;
   TransactedBy: string;
+  ReferenceId: string;
 }
 
 const apiEndpoint = "https://jnvsitamarhi.org/JsonData/accounts.json";
 
 export const Accounts = () => {
-  const classes = useStyles();
   const [transactions, setTransactions] = React.useState<ITransaction[]>([]);
 
   React.useEffect(() => {
@@ -38,16 +31,15 @@ export const Accounts = () => {
     fetch(apiEndpoint + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setTransactions(data as ITransaction[]);
       });
   }, []);
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead >
-          <TableRow className={classes.tableHeader}>
+      <Table sx={tableStyles} aria-label="simple table">
+        <TableHead>
+          <TableRow>
             <TableCell>Date</TableCell>
             <TableCell align="right">Amount</TableCell>
             <TableCell align="right">By</TableCell>
@@ -57,7 +49,7 @@ export const Accounts = () => {
         </TableHead>
         <TableBody>
           {transactions.map((row) => (
-            <TableRow key={row.Balance} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow key={row.ReferenceId} sx={tableRowStyles}>
               <TableCell align="left">{new Date(row.Date).toLocaleDateString()}</TableCell>
               <TableCell align="right">{row.Credit - row.Debit} ₹</TableCell>
               <TableCell align="right">{row.TransactedBy}</TableCell>
