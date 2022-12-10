@@ -38,6 +38,7 @@ const apiEndpoint = "https://jnvsitamarhi.org/JsonData/alumni.json";
 
 export const AlumniSearch = () => {
   const [alumni, setAlumni] = React.useState<IAlumnus[]>([]);
+
   React.useEffect(() => {
     const random = Math.floor(Math.random() * 9000 + 1000);
     fetch(apiEndpoint + "?random=" + random)
@@ -46,6 +47,7 @@ export const AlumniSearch = () => {
         setAlumni(data as IAlumnus[]);
       });
   }, []);
+
   return (
     <>
       <Stack direction="row" spacing={0} sx={searchBoxStackStyles}>
