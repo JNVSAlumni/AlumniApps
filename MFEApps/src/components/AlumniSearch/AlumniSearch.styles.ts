@@ -4,6 +4,7 @@ export const searchBoxStackStyles: SxProps = {
   width: "100%",
   justifyContent: "center",
   flexWrap: "wrap",
+  marginTop: 4,
 };
 export const searchBoxContainer: SxProps = {
   p: "2px 4px",
@@ -34,5 +35,6 @@ export const searchResultStackStyles: SxProps = {
 
 export const searchResultContainer: SxProps = {
   minWidth: 275,
+  width: 320,
   margin: "5px",
 };
