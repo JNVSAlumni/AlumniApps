@@ -1,3 +1,14 @@
+export const profileTypes = [
+  {
+    value: "Student",
+    label: "Student",
+  },
+  {
+    value: "Job Holder",
+    label: "Job Holder",
+  },
+];
+
 export const examsPassed = [
   {
     value: "10th Board only",
