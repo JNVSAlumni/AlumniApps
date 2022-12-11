@@ -335,7 +335,7 @@ export const AlumniForm = () => {
       <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">{"Congrats! 🎉"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">You have successfully submitted your details !</DialogContentText>
+          <DialogContentText id="alert-dialog-description">You have successfully submitted your details. The summary of this form submission has been sent to you via email.</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} autoFocus>
