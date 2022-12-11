@@ -328,7 +328,7 @@ export const AlumniForm = () => {
         <Alert sx={errorAlertStyles} severity="error">
           <AlertTitle>Error</AlertTitle>
           {errorMessages.map((message) => (
-            <div>{message}</div>
+            <div key={message}>{message}</div>
           ))}
         </Alert>
       )}
