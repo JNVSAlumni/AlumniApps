@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-    mode: 'development',
+    mode: 'production',
     entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"), // the bundle output path

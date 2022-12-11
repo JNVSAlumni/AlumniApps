@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { tableRowStyles, tableStyles } from "./Accounts.styles";
+import { Config } from "../../config";
 
 // Transaction Interface
 interface ITransaction {
@@ -21,14 +22,12 @@ interface ITransaction {
   ReferenceId: string;
 }
 
-const apiEndpoint = "https://jnvsitamarhi.org/JsonData/accounts.json";
-
 export const Accounts = () => {
   const [transactions, setTransactions] = React.useState<ITransaction[]>([]);
 
   React.useEffect(() => {
     const random = Math.floor(Math.random() * 9000 + 1000);
-    fetch(apiEndpoint + "?random=" + random)
+    fetch(Config.AccountsAPI + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
         setTransactions(data as ITransaction[]);

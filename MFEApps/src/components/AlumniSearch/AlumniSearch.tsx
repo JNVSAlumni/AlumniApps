@@ -23,6 +23,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 import SchoolIcon from "@mui/icons-material/School";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import { Config } from "../../config";
 
 // Define Alumni Interface
 interface IAlumnus {
@@ -40,15 +41,13 @@ interface IAlumnus {
   Verified: number;
 }
 
-const apiEndpoint = "https://jnvsitamarhi.org/JsonData/alumni.json";
-
 export const AlumniSearch = () => {
   const [alumni, setAlumni] = React.useState<IAlumnus[]>([]);
   const [searchResult, setSearchResult] = React.useState<IAlumnus[]>([]);
 
   React.useEffect(() => {
     const random = Math.floor(Math.random() * 9000 + 1000);
-    fetch(apiEndpoint + "?random=" + random)
+    fetch(Config.AlumniSearchAPI + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
         setAlumni(data as IAlumnus[]);

@@ -12,11 +12,10 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import * as React from "react";
+import { Config } from "../../config";
 import { errorAlertStyles, fieldStyles, iframeStyles, submitButtonStyles } from "./AlumniForm.styles";
 import { AlumniBatchOptions, ExamsPassedOptions, ProfileType, ProfileTypeOptions } from "./Constants";
 import { LocationOptions } from "./Locations";
-
-const apiEndpoint = "https://docs.google.com/forms/d/e/1FAIpQLSdXYLRuqPdrKCgxSyAv-6GgrxUqbVtdMwgMLFOj_wMyIvXkMg/formResponse";
 
 export const AlumniForm = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -157,7 +156,7 @@ export const AlumniForm = () => {
   return (
     <>
       <iframe ref={iframeRef} onLoad={handleIframeLoad} style={iframeStyles} name="hidden_iframe" id="hidden_iframe"></iframe>
-      <form ref={formRef} action={apiEndpoint} method="POST" target="hidden_iframe" onSubmit={onSubmit}>
+      <form ref={formRef} action={Config.AlumniFormAPI} method="POST" target="hidden_iframe" onSubmit={onSubmit}>
         <Stack direction="column">
           <TextField
             required
