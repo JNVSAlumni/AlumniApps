@@ -9,8 +9,12 @@ export const fieldStyles: SxProps = {
 };
 
 export const submitButtonStyles: SxProps = {
-  marginTop: "20px",
+  margin: "20px 0px",
 };
+
+export const errorAlertStyles: SxProps = {
+  maxWidth: 500,
+}
 
 export const iframeStyles: React.CSSProperties = {
   display: "none",

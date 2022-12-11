@@ -1,7 +1,18 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, MenuItem, TextField } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import * as React from "react";
-import { fieldStyles, iframeStyles, submitButtonStyles } from "./AlumniForm.styles";
+import { errorAlertStyles, fieldStyles, iframeStyles, submitButtonStyles } from "./AlumniForm.styles";
 import { AlumniBatchOptions, ExamsPassedOptions, ProfileType, ProfileTypeOptions } from "./Constants";
 import { LocationOptions } from "./Locations";
 
@@ -10,6 +21,8 @@ const apiEndpoint = "https://docs.google.com/forms/d/e/1FAIpQLSdXYLRuqPdrKCgxSyA
 export const AlumniForm = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
+  const [errorMessages, setErrorMessages] = React.useState<string[]>([]);
   const [submitStatus, setSubmitStatus] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
@@ -25,17 +38,39 @@ export const AlumniForm = () => {
   const [company, setCompany] = React.useState("");
   const [designation, setDesignation] = React.useState("");
 
-  const handleMobileNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const result = ValidateMobileNumber(event.target.value);
-    console.log(result);
-    setMobileNumber(event.target.value);
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    validateForm();
   };
+
   const handleBatchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBatch(event.target.value);
+    validateForm();
   };
 
   const handleExamsPassedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setExamsPassed(event.target.value);
+    validateForm();
+  };
+
+  const handleMobileNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMobileNumber(event.target.value);
+    validateForm();
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+    validateForm();
+  };
+
+  const handleSocialProfileLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSocialProfileLink(event.target.value);
+    validateForm();
+  };
+
+  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrentLocation(event.target.value);
+    validateForm();
   };
 
   const handleProfileTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,17 +80,47 @@ export const AlumniForm = () => {
       setDesignation("---NA---");
       setCollege("");
       setHighestQualification("");
-    }
-    else if (event.target.value === ProfileType.JobHolder) {
+    } else if (event.target.value === ProfileType.JobHolder) {
       setCollege("---NA---");
       setHighestQualification("---NA---");
       setCompany("");
       setDesignation("");
     }
+    validateForm();
   };
 
-  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentLocation(event.target.value);
+  const handleCompanyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(event.target.value);
+    validateForm();
+  };
+
+  const handleDesignationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDesignation(event.target.value);
+    validateForm();
+  };
+
+  const handleCollegeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCollege(event.target.value);
+    validateForm();
+  };
+
+  const handleHighestQualificationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHighestQualification(event.target.value);
+    validateForm();
+  };
+
+  const validateForm = () => {
+    const errorMessages: string[] = [];
+    const isEmailValid = ValidateEmail(email);
+    const isMobileNumberValid = ValidateMobileNumber(mobileNumber);
+    if (!isEmailValid) {
+      errorMessages.push("Please enter a valid email address.");
+    }
+    if (!isMobileNumberValid) {
+      errorMessages.push("Please enter a valid 10 digit mobile number.");
+    }
+    setErrorMessages(errorMessages);
+    setIsFormValid(isEmailValid && isMobileNumberValid);
   };
 
   const formReset = () => {
@@ -102,7 +167,7 @@ export const AlumniForm = () => {
             label="Your Name"
             name="entry.2059521736"
             helperText="Enter your Name"
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
           />
           <TextField
             required
@@ -156,7 +221,7 @@ export const AlumniForm = () => {
             name="entry.2110054454"
             label="Email Address"
             helperText="Enter your email address."
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
           <TextField
             required
@@ -166,7 +231,7 @@ export const AlumniForm = () => {
             name="entry.1146134730"
             label="Social Profile Link"
             helperText="Enter your Facebook / Instagram / Social profile link."
-            onChange={(e) => setSocialProfileLink(e.target.value)}
+            onChange={handleSocialProfileLinkChange}
           />
           <TextField
             required
@@ -193,8 +258,8 @@ export const AlumniForm = () => {
             variant="standard"
             name="entry.1072180231"
             label="Select your profile type."
-            onChange={handleProfileTypeChange}
             helperText="Select your profile type."
+            onChange={handleProfileTypeChange}
           >
             {ProfileTypeOptions.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -213,7 +278,7 @@ export const AlumniForm = () => {
             name="entry.1096792936"
             label="Company / Organization"
             helperText="Company / Organization where you currently work."
-            onChange={(e) => setCompany(e.target.value)}
+            onChange={handleCompanyChange}
           />
           <TextField
             required
@@ -226,7 +291,7 @@ export const AlumniForm = () => {
             name="entry.645748317"
             label="Designation"
             helperText="Your designation at work."
-            onChange={(e) => setDesignation(e.target.value)}
+            onChange={handleDesignationChange}
           />
           <TextField
             required
@@ -239,7 +304,7 @@ export const AlumniForm = () => {
             name="entry.1601452556"
             label="College / University"
             helperText="College / University attending / last attended."
-            onChange={(e) => setCollege(e.target.value)}
+            onChange={handleCollegeChange}
           />
           <TextField
             required
@@ -252,13 +317,21 @@ export const AlumniForm = () => {
             name="entry.1485639544"
             label="Highest Qualification"
             helperText="Your highest degree completed or pursuing."
-            onChange={(e) => setHighestQualification(e.target.value)}
+            onChange={handleHighestQualificationChange}
           />
         </Stack>
-        <Button sx={submitButtonStyles} type="submit" variant="contained">
+        <Button disabled={!isFormValid} sx={submitButtonStyles} type="submit" variant="contained">
           Submit
         </Button>
       </form>
+      {errorMessages.length > 0 && (
+        <Alert sx={errorAlertStyles} severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {errorMessages.map((message) => (
+            <div>{message}</div>
+          ))}
+        </Alert>
+      )}
       <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">{"Congrats! 🎉"}</DialogTitle>
         <DialogContent>
@@ -277,6 +350,15 @@ export const AlumniForm = () => {
 const ValidateMobileNumber = (mobileNumber: string) => {
   const regexMobileNumber = /^[6-9]\d{9}$|^[0][6-9]\d{9}$|^[+][9][1][6-9]\d{9}$/g;
   const result = mobileNumber.match(regexMobileNumber);
+  if (result?.length === 1) {
+    return true;
+  }
+  return false;
+};
+
+const ValidateEmail = (email: string) => {
+  const regexEmail = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/g;
+  const result = email.match(regexEmail);
   if (result?.length === 1) {
     return true;
   }
