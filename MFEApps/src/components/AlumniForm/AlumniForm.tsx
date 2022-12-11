@@ -234,6 +234,7 @@ export const AlumniForm = () => {
             InputProps={{
               readOnly: profileType === ProfileType.JobHolder,
             }}
+            value={college}
             variant="standard"
             name="entry.1601452556"
             label="College / University"
