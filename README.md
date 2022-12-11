@@ -11,3 +11,4 @@ Some third party software has been used. Their respective license are summarised
 |Library|Author|Licence|
 |---|---|---|
 |React|Facebook, Inc. and its affiliates|[MIT License](https://github.com/facebook/react/blob/master/LICENSE)|
+|Material-UI|Call-Em-All|[MIT License](https://github.com/mui-org/material-ui/blob/next/LICENSE)|
