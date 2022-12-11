@@ -7,3 +7,11 @@ export const fieldStyles: SxProps = {
     fontSize: "16px !important",
   }
 };
+
+export const submitButtonStyles: SxProps = {
+  marginTop: "20px",
+};
+
+export const iframeStyles: React.CSSProperties = {
+  display: "none",
+};

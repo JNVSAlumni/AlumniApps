@@ -1,15 +1,20 @@
-export const profileTypes = [
+export enum ProfileType{
+  Student = "Student",
+  JobHolder = "Job Holder",
+}
+
+export const ProfileTypeOptions = [
   {
-    value: "Student",
-    label: "Student",
+    value: ProfileType.Student,
+    label: ProfileType.Student,
   },
   {
-    value: "Job Holder",
-    label: "Job Holder",
+    value: ProfileType.JobHolder,
+    label: ProfileType.JobHolder,
   },
 ];
 
-export const examsPassed = [
+export const ExamsPassedOptions = [
   {
     value: "10th Board only",
     label: "10th Board only",
@@ -24,7 +29,7 @@ export const examsPassed = [
   },
 ];
 
-export const alumniBatches = [
+export const AlumniBatchOptions = [
   {
     value: "01st Batch (1999)",
     label: "01st Batch (1999)",
