@@ -26,7 +26,7 @@ export const AlumniForm = () => {
   const [designation, setDesignation] = React.useState("");
 
   const handleMobileNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const result = ValidateMobileNumber(event.target.value);    
+    const result = ValidateMobileNumber(event.target.value);
     console.log(result);
     setMobileNumber(event.target.value);
   };
@@ -41,13 +41,14 @@ export const AlumniForm = () => {
   const handleProfileTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedProfileType(event.target.value);
     if (event.target.value === ProfileType.Student) {
-      setCompany("NA");
-      setDesignation("NA");
+      setCompany("---NA---");
+      setDesignation("---NA---");
       setCollege("");
       setHighestQualification("");
-    } else {
-      setCollege("NA");
-      setHighestQualification("NA");
+    }
+    else if (event.target.value === ProfileType.JobHolder) {
+      setCollege("---NA---");
+      setHighestQualification("---NA---");
       setCompany("");
       setDesignation("");
     }
@@ -144,7 +145,6 @@ export const AlumniForm = () => {
             variant="standard"
             name="entry.219439507"
             label="Mobile Number"
-            error={!ValidateMobileNumber(mobileNumber)}
             helperText="Enter your 10 digits mobile no."
             onChange={handleMobileNumberChange}
           />
@@ -152,7 +152,6 @@ export const AlumniForm = () => {
             required
             sx={fieldStyles}
             value={email}
-            error={!email.includes("@")}
             variant="standard"
             name="entry.2110054454"
             label="Email Address"
@@ -203,54 +202,57 @@ export const AlumniForm = () => {
               </MenuItem>
             ))}
           </TextField>
-          {profileType === ProfileType.JobHolder && (
-            <>
-              <TextField
-                required
-                sx={fieldStyles}
-                value={company}
-                variant="standard"
-                name="entry.1096792936"
-                label="Company / Organization"
-                helperText="Company / Organization where you currently work."
-                onChange={(e) => setCompany(e.target.value)}
-              />
-              <TextField
-                required
-                sx={fieldStyles}
-                value={designation}
-                variant="standard"
-                name="entry.645748317"
-                label="Designation"
-                helperText="Your designation at work."
-                onChange={(e) => setDesignation(e.target.value)}
-              />
-            </>
-          )}
-          {profileType === ProfileType.Student && (
-            <>
-              <TextField
-                required
-                sx={fieldStyles}
-                value={college}
-                variant="standard"
-                name="entry.1601452556"
-                label="College / University"
-                helperText="College / University attending / last attended."
-                onChange={(e) => setCollege(e.target.value)}
-              />
-              <TextField
-                required
-                sx={fieldStyles}
-                value={highestQualification}
-                variant="standard"
-                name="entry.1485639544"
-                label="Highest Qualification"
-                helperText="Your highest degree completed or pursuing."
-                onChange={(e) => setHighestQualification(e.target.value)}
-              />
-            </>
-          )}
+          <TextField
+            required
+            sx={fieldStyles}
+            value={company}
+            InputProps={{
+              readOnly: profileType === ProfileType.Student,
+            }}
+            variant="standard"
+            name="entry.1096792936"
+            label="Company / Organization"
+            helperText="Company / Organization where you currently work."
+            onChange={(e) => setCompany(e.target.value)}
+          />
+          <TextField
+            required
+            sx={fieldStyles}
+            value={designation}
+            InputProps={{
+              readOnly: profileType === ProfileType.Student,
+            }}
+            variant="standard"
+            name="entry.645748317"
+            label="Designation"
+            helperText="Your designation at work."
+            onChange={(e) => setDesignation(e.target.value)}
+          />
+          <TextField
+            required
+            sx={fieldStyles}
+            InputProps={{
+              readOnly: profileType === ProfileType.JobHolder,
+            }}
+            variant="standard"
+            name="entry.1601452556"
+            label="College / University"
+            helperText="College / University attending / last attended."
+            onChange={(e) => setCollege(e.target.value)}
+          />
+          <TextField
+            required
+            sx={fieldStyles}
+            value={highestQualification}
+            InputProps={{
+              readOnly: profileType === ProfileType.JobHolder,
+            }}
+            variant="standard"
+            name="entry.1485639544"
+            label="Highest Qualification"
+            helperText="Your highest degree completed or pursuing."
+            onChange={(e) => setHighestQualification(e.target.value)}
+          />
         </Stack>
         <Button sx={submitButtonStyles} type="submit" variant="contained">
           Submit
@@ -271,11 +273,10 @@ export const AlumniForm = () => {
   );
 };
 
-
 const ValidateMobileNumber = (mobileNumber: string) => {
   const regexMobileNumber = /^[6-9]\d{9}$|^[0][6-9]\d{9}$|^[+][9][1][6-9]\d{9}$/g;
-  const result =  mobileNumber.match(regexMobileNumber);
-  if(result?.length === 1) {
+  const result = mobileNumber.match(regexMobileNumber);
+  if (result?.length === 1) {
     return true;
   }
   return false;
