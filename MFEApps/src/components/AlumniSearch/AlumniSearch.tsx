@@ -14,6 +14,7 @@ import {
   searchBoxInputStyles,
   searchBoxStackStyles,
   searchButtonStyles,
+  searchResultCardContentStyles,
   searchResultContainer,
   searchResultStackStyles,
 } from "./AlumniSearch.styles";
@@ -70,7 +71,7 @@ export const AlumniSearch = () => {
   return (
     <>
       <Stack direction="row" spacing={0} sx={searchBoxStackStyles}>
-        <Paper component="form" sx={searchBoxContainer}>
+        <Paper sx={searchBoxContainer}>
           <IconButton sx={iconButtonStyles} aria-label="menu">
             <PersonIcon />
           </IconButton>
@@ -89,7 +90,7 @@ export const AlumniSearch = () => {
       <Stack direction="row" spacing={0} sx={searchResultStackStyles}>
         {searchResult.map((row) => (
           <Card raised sx={searchResultContainer} key={row.Timestamp}>
-            <CardContent>
+            <CardContent sx={searchResultCardContentStyles}>
               <a href={row.Social} target="_blank">
                 <Typography align="center" variant="h6" component="div">
                   {row.Name}

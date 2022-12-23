@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist/*",
-    "build": "webpack",
-    "dev": "webpack serve"
+    "build": "webpack --mode=production",
+    "dev": "webpack serve --mode=development"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

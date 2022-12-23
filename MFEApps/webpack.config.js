@@ -4,7 +4,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-    mode: 'production',
     entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"), // the bundle output path

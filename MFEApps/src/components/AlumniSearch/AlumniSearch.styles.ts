@@ -38,3 +38,10 @@ export const searchResultContainer: SxProps = {
   width: 320,
   margin: "5px",
 };
+
+export const searchResultCardContentStyles: SxProps = {
+  padding: "10px 0px 0px 0px",
+  ":last-child":{
+    paddingBottom: 0,
+  }
+}
