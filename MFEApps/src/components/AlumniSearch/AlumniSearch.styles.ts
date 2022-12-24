@@ -22,6 +22,7 @@ export const iconButtonStyles: SxProps = {
 export const searchBoxInputStyles: SxProps = {
   ml: 1,
   flex: 1,
+  fontSize: "1.2rem",
 };
 
 export const searchButtonStyles: SxProps = {

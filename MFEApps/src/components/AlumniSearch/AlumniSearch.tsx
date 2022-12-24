@@ -104,7 +104,7 @@ export const AlumniSearch = () => {
                   {row.Name}
                 </Typography>
               </a>
-              <List dense={true}>
+              <List dense={false}>
                 <ListItem>
                   <ListItemIcon>
                     <LabelIcon />
