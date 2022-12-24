@@ -8,12 +8,14 @@ import { List, ListItem, ListItemIcon, ListItemText, Stack } from "@mui/material
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { Alert } from "@mui/material";
 import {
   iconButtonStyles,
   searchBoxContainer,
   searchBoxInputStyles,
   searchBoxStackStyles,
   searchButtonStyles,
+  searchResultAlertContainerStyles,
   searchResultCardContentStyles,
   searchResultContainer,
   searchResultStackStyles,
@@ -24,6 +26,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 import SchoolIcon from "@mui/icons-material/School";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Config } from "../../config";
 
 // Define Alumni Interface
@@ -86,6 +89,11 @@ export const AlumniSearch = () => {
           </IconButton>
         </Paper>
       </Stack>
+      {searchResult.length > 0 && (
+        <Stack direction="row" spacing={0} sx={searchResultAlertContainerStyles}>
+          <Alert iconMapping={{ success: <CheckCircleOutlineIcon fontSize="inherit" /> }}>{searchResult.length} result(s) found!</Alert>
+        </Stack>
+      )}
 
       <Stack direction="row" spacing={0} sx={searchResultStackStyles}>
         {searchResult.map((row) => (

@@ -33,6 +33,16 @@ export const searchResultStackStyles: SxProps = {
   flexWrap: "wrap",
 };
 
+export const searchResultAlertContainerStyles: SxProps = {
+  justifyContent: "center",
+  flexWrap: "wrap",
+  paddingBottom: 4,
+}
+
+export const searchResultAlertStyles: SxProps = {
+  minWidth: 275,
+}
+
 export const searchResultContainer: SxProps = {
   minWidth: 275,
   width: 320,
