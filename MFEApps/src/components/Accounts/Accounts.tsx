@@ -40,7 +40,7 @@ export const Accounts = () => {
       <Table sx={tableStyles} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
+            <TableCell sx={tableColumnStyles}>Date</TableCell>
             <TableCell sx={tableColumnStyles} align="left">CR/DR</TableCell>
             <TableCell sx={tableColumnStyles} align="left">Balance</TableCell>
             <TableCell sx={tableColumnStyles} align="left">Transaction Info</TableCell>
