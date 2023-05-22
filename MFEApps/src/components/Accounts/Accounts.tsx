@@ -41,7 +41,7 @@ export const Accounts = () => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">CR/DR</TableCell>
             <TableCell align="right">Balance</TableCell>
             <TableCell align="right">By</TableCell>
             <TableCell align="right">Purpose</TableCell>
