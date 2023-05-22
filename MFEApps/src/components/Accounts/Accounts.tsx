@@ -11,15 +11,13 @@ import { Config } from "../../config";
 
 // Transaction Interface
 interface ITransaction {
-  Id: number;
-  Balance: number;
-  Batch: string;
-  Credit: number;
-  Debit: number;
+  Serial: number;
   Date: string;
+  Balance: number;
+  Credit: number;
+  Debit: number;  
   Description: string;
   TransactedBy: string;
-  ReferenceId: string;
 }
 
 export const Accounts = () => {
@@ -30,7 +28,10 @@ export const Accounts = () => {
     fetch(Config.AccountsAPI + "?random=" + random)
       .then((response) => response.json())
       .then((data) => {
-        setTransactions(data as ITransaction[]);
+        const sortedData = data.sort((a: ITransaction, b: ITransaction) => {
+          return b.Serial - a.Serial;
+        });
+        setTransactions(sortedData as ITransaction[]);
       });
   }, []);
 
@@ -41,21 +42,19 @@ export const Accounts = () => {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Balance</TableCell>
             <TableCell align="right">By</TableCell>
-            <TableCell align="right">Batch</TableCell>
             <TableCell align="right">Purpose</TableCell>
-            <TableCell align="right">ReferenceId</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {transactions.map((row) => (
-            <TableRow key={row.ReferenceId} sx={tableRowStyles}>
+            <TableRow key={row.Serial} sx={tableRowStyles}>
               <TableCell align="left">{new Date(row.Date).toLocaleDateString()}</TableCell>
               <TableCell align="right">{row.Credit - row.Debit} ₹</TableCell>
+              <TableCell align="right">{row.Balance} ₹</TableCell>
               <TableCell align="right">{row.TransactedBy}</TableCell>
-              <TableCell align="right">{row.Batch}</TableCell>
               <TableCell align="right">{row.Description}</TableCell>
-              <TableCell align="right">{row.ReferenceId}</TableCell>
             </TableRow>
           ))}
         </TableBody>
