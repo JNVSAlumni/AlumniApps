@@ -41,20 +41,20 @@ export const Accounts = () => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">CR/DR</TableCell>
-            <TableCell align="right">Balance</TableCell>
-            <TableCell align="right">Transaction Info</TableCell>
-            <TableCell align="right">Purpose</TableCell>
+            <TableCell align="left">CR/DR</TableCell>
+            <TableCell align="left">Balance</TableCell>
+            <TableCell align="left">Transaction Info</TableCell>
+            <TableCell align="left">Purpose</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {transactions.map((row) => (
             <TableRow key={row.Serial} sx={tableRowStyles}>
               <TableCell align="left">{new Date(row.Date).toLocaleDateString()}</TableCell>
-              <TableCell align="right">{row.Credit - row.Debit} ₹</TableCell>
-              <TableCell align="right">{row.Balance} ₹</TableCell>
-              <TableCell align="right">{row.TransactedBy}</TableCell>
-              <TableCell align="right">{row.Description}</TableCell>
+              <TableCell align="left">{row.Credit - row.Debit} ₹</TableCell>
+              <TableCell align="left">{row.Balance} ₹</TableCell>
+              <TableCell align="left">{row.TransactedBy}</TableCell>
+              <TableCell align="left">{row.Description}</TableCell>
             </TableRow>
           ))}
         </TableBody>
