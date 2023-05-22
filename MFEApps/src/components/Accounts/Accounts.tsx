@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { tableRowStyles, tableStyles } from "./Accounts.styles";
+import { tableColumnStyles, tableRowStyles, tableStyles } from "./Accounts.styles";
 import { Config } from "../../config";
 
 // Transaction Interface
@@ -41,10 +41,10 @@ export const Accounts = () => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="left">CR/DR</TableCell>
-            <TableCell align="left">Balance</TableCell>
-            <TableCell align="left">Transaction Info</TableCell>
-            <TableCell align="left">Purpose</TableCell>
+            <TableCell sx={tableColumnStyles} align="left">CR/DR</TableCell>
+            <TableCell sx={tableColumnStyles} align="left">Balance</TableCell>
+            <TableCell sx={tableColumnStyles} align="left">Transaction Info</TableCell>
+            <TableCell sx={tableColumnStyles} align="left">Purpose</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

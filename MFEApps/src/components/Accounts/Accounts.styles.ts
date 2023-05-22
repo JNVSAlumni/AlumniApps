@@ -13,3 +13,7 @@ export const tableRowStyles: SxProps = {
     border: 0,
   },
 };
+
+export const tableColumnStyles: SxProps = {
+  minWidth: 50,
+}
