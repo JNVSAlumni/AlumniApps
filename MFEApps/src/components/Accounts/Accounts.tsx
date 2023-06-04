@@ -42,17 +42,15 @@ export const Accounts = () => {
           <TableRow>
             <TableCell sx={tableColumnStyles}>Date</TableCell>
             <TableCell sx={tableColumnStyles} align="left">CR/DR</TableCell>
-            <TableCell sx={tableColumnStyles} align="left">Balance</TableCell>
             <TableCell sx={tableColumnStyles} align="left">Transaction Info</TableCell>
             <TableCell sx={tableColumnStyles} align="left">Purpose</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions.map((row) => (
+          {transactions.filter(x => x.Credit != x.Debit).map((row) => (
             <TableRow key={row.Serial} sx={tableRowStyles}>
               <TableCell align="left">{new Date(row.Date).toLocaleDateString()}</TableCell>
               <TableCell align="left">{row.Credit - row.Debit} ₹</TableCell>
-              <TableCell align="left">{row.Balance} ₹</TableCell>
               <TableCell align="left">{row.TransactedBy}</TableCell>
               <TableCell align="left">{row.Description}</TableCell>
             </TableRow>
