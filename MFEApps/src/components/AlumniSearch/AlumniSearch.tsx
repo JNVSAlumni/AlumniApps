@@ -20,13 +20,14 @@ import {
   searchResultContainer,
   searchResultStackStyles,
 } from "./AlumniSearch.styles";
-import LabelIcon from "@mui/icons-material/Label";
+import BadgeIcon from '@mui/icons-material/Badge';
 import PlaceIcon from "@mui/icons-material/Place";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
 import SchoolIcon from "@mui/icons-material/School";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import UpdateIcon from '@mui/icons-material/Update';
 import { Config } from "../../config";
 
 // Define Alumni Interface
@@ -105,27 +106,27 @@ export const AlumniSearch = () => {
                 </Typography>
               </a>
               <List dense={false}>
-                <ListItem>
+                <ListItem title="Batch">
                   <ListItemIcon>
-                    <LabelIcon />
+                    <BadgeIcon />
                   </ListItemIcon>
-                  <ListItemText primary={row.Batch} />
+                  <ListItemText primary={row.Batch.replace('(', '(AISSE: ')} />
                 </ListItem>
                 <ListItem>
-                  <ListItemIcon>
+                  <ListItemIcon title="Location">
                     <PlaceIcon />
                   </ListItemIcon>
                   <ListItemText primary={row.Location} />
                 </ListItem>
                 {row.Profile == "Job Holder" ? (
                   <>
-                    <ListItem>
+                    <ListItem title="Organisation">
                       <ListItemIcon>
                         <BusinessIcon />
                       </ListItemIcon>
                       <ListItemText primary={row.Organisation} />
                     </ListItem>
-                    <ListItem>
+                    <ListItem title="Designation">
                       <ListItemIcon>
                         <WorkIcon />
                       </ListItemIcon>
@@ -134,13 +135,13 @@ export const AlumniSearch = () => {
                   </>
                 ) : (
                   <>
-                    <ListItem>
+                    <ListItem title="Institute">
                       <ListItemIcon>
                         <LocalLibraryIcon />
                       </ListItemIcon>
                       <ListItemText primary={row.Institute} />
                     </ListItem>
-                    <ListItem>
+                    <ListItem title="Degree">
                       <ListItemIcon>
                         <SchoolIcon />
                       </ListItemIcon>
@@ -148,7 +149,14 @@ export const AlumniSearch = () => {
                     </ListItem>
                   </>
                 )}
+                <ListItem title="Last Updated">
+                  <ListItemIcon>
+                    <UpdateIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={row.Timestamp.substring(0, 10)} />
+                </ListItem>
               </List>
+              
             </CardContent>
           </Card>
         ))}
