@@ -23,7 +23,7 @@ export const AlumniForm = () => {
   const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
   const [errorMessages, setErrorMessages] = React.useState<string[]>([]);
   const [submitStatus, setSubmitStatus] = React.useState<boolean>(false);
-  const [open, setOpen] = React.useState(false);
+  const [openDialogue, setOpenDialogue] = React.useState(false);
   const [name, setName] = React.useState("");
   const [batch, setBatch] = React.useState("");
   const [examsPassed, setExamsPassed] = React.useState("");
@@ -143,12 +143,12 @@ export const AlumniForm = () => {
 
   const handleClose = () => {
     formReset();
-    setOpen(false);
+    setOpenDialogue(false);
   };
 
   const handleIframeLoad = () => {
     if (submitStatus) {
-      setOpen(true);
+      setOpenDialogue(true);
       setSubmitStatus(false);
     }
   };
@@ -325,13 +325,12 @@ export const AlumniForm = () => {
       </form>
       {errorMessages.length > 0 && (
         <Alert sx={errorAlertStyles} severity="error">
-          <AlertTitle>Error</AlertTitle>
           {errorMessages.map((message) => (
             <div key={message}>{message}</div>
           ))}
         </Alert>
       )}
-      <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+      <Dialog open={openDialogue} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">{"Congrats! 🎉"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">You have successfully submitted your details. The summary of this form submission has been sent to you via email.</DialogContentText>
